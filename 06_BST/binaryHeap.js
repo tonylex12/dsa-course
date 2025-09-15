@@ -323,3 +323,68 @@ console.log("Heap después de extraer (array):");
 minHeap.printArray();
 console.log("Heap después de extraer (compacto):");
 minHeap.printCompact();
+
+// --- Ejemplo de uso: Leaderboard de un Videojuego ---
+// Objetivo: Mantener un registro de los 5 mejores puntajes de forma eficiente.
+// Usaremos un MinHeap para lograr esto. El heap almacenará los 5 puntajes más altos,
+// con el más bajo de esos 5 en la cima (la raíz), permitiendo una rápida comparación.
+
+console.log("\n=== Ejemplo: Leaderboard de un Videojuego (Top 5) ===");
+
+const TOP_N = 5;
+const leaderboard = new BinaryHeap("min"); // MinHeap para encontrar y reemplazar el puntaje más bajo del top 5.
+
+const scoresStream = [1200, 800, 2500, 1500, 3000, 950, 4000, 1800];
+
+console.log(`Procesando puntajes: ${scoresStream.join(", ")}`);
+console.log("-------------------------------------------------");
+
+scoresStream.forEach((score) => {
+  console.log(`\nNuevo puntaje obtenido: ${score}`);
+
+  if (leaderboard.heap.length < TOP_N) {
+    // Si el leaderboard aún no está lleno, simplemente agregamos el puntaje.
+    console.log(`-> El leaderboard no está lleno. Agregando ${score}.`);
+    leaderboard.insert(score);
+  } else {
+    // Si el leaderboard está lleno, comparamos el nuevo puntaje con el más bajo del top 5.
+    const lowestTopScore = leaderboard.peek();
+    console.log(
+      `-> El leaderboard está lleno. El puntaje más bajo del top 5 es ${lowestTopScore}.`
+    );
+
+    if (score > lowestTopScore) {
+      // Si el nuevo puntaje es mayor, reemplazamos el más bajo del top 5.
+      const removed = leaderboard.extract(); // Elimina el puntaje más bajo del top 5
+      console.log(
+        `-> ${score} es mayor que ${lowestTopScore}. Reemplazando ${removed}...`
+      );
+      leaderboard.insert(score); // Inserta el nuevo puntaje alto
+    } else {
+      // Si el nuevo puntaje no es lo suficientemente alto, lo ignoramos.
+      console.log(
+        `-> ${score} no es lo suficientemente alto para entrar en el top 5. Ignorando.`
+      );
+    }
+  }
+  console.log("Estado actual del leaderboard (MinHeap interno):");
+  leaderboard.printArray();
+});
+
+console.log("\n-------------------------------------------------");
+console.log("¡Procesamiento de puntajes finalizado!");
+console.log("El estado final del heap (los 5 mejores puntajes) es:");
+leaderboard.printTree();
+
+// Para mostrar el leaderboard en orden descendente, extraemos todos los elementos.
+const finalLeaderboard = [];
+while (!leaderboard.isEmpty()) {
+  finalLeaderboard.push(leaderboard.extract());
+}
+
+console.log("\n🏆 Leaderboard Final (Top 5) 🏆");
+finalLeaderboard
+  .reverse() // El MinHeap extrae de menor a mayor, lo invertimos.
+  .forEach((score, index) => {
+    console.log(`${index + 1}. ${score} puntos`);
+  });
