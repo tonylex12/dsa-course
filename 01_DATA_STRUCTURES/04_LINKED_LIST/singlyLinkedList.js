@@ -304,6 +304,15 @@ class SinglyLinkedList {
     return undefined;
   }
 
+  // Obtener elementos desde el k-ésimo nodo hasta el final - O(n)
+  getFromIndex(startIndex) {
+    if (startIndex < 0 || startIndex >= this.size) {
+      return new SinglyLinkedList(); // Lista vacía si índice inválido
+    }
+
+    return this.filter((data, index) => index >= startIndex);
+  }
+
   // toString - O(n)
   toString() {
     if (!this.head) return "null";
@@ -370,6 +379,8 @@ console.log("Después de eliminar primero:", list.toString()); // A -> X -> B ->
 
 console.log("Eliminar último:", list.removeLast()); // C
 console.log("Después de eliminar último:", list.toString()); // A -> X -> B -> null
+
+console.log("Desde índice 1:", list.getFromIndex(1).toString()); // X -> B -> null
 
 // Iteración
 console.log("=== Iteración ===");
