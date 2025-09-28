@@ -297,3 +297,95 @@ console.log("\n6. Propiedades:");
 console.log("Es válido BST:", bst.isValidBST()); // true
 console.log("Altura:", bst.getHeight()); // 3
 console.log("Está vacío:", bst.isEmpty()); // false
+
+// 📈 **Complejidad de operaciones:**
+
+/*
+Operación           Promedio    Peor caso   Mejor caso
+---------           --------    ---------   ----------
+insert(data)        O(log n)    O(n)        O(1)
+search(data)        O(log n)    O(n)        O(1)
+remove(data)        O(log n)    O(n)        O(1)
+findMin()           O(log n)    O(n)        O(1)
+findMax()           O(log n)    O(n)        O(1)
+inOrder()           O(n)        O(n)        O(n)
+preOrder()          O(n)        O(n)        O(n)
+postOrder()         O(n)        O(n)        O(n)
+getHeight()         O(n)        O(n)        O(n)
+isValidBST()        O(n)        O(n)        O(n)
+*/
+
+// 🎯 **Ventajas del BST:**
+// ✅ Búsqueda, inserción y eliminación eficientes: O(log n) en promedio
+// ✅ Recorrido in-order produce elementos ordenados
+// ✅ No requiere reorganización completa al insertar/eliminar
+// ✅ Operaciones de min/max eficientes
+
+// ⚠️ **Desventajas:**
+// ❌ Puede degenerarse en lista enlazada: O(n) en peor caso
+// ❌ No está autobalanceado (considera AVL o Red-Black trees para eso)
+// ❌ Rendimiento dependiente del orden de inserción
+
+// 🔧 **Casos de uso ideales:**
+// - Diccionarios y bases de datos con búsquedas frecuentes
+// - Rangos de datos que necesitan estar ordenados
+// - Implementación de conjuntos (sets) ordenados
+// - Algoritmos que requieren acceso rápido a min/max
+// - Expresiones matemáticas (árboles de sintaxis)
+
+// 🚀 **Ejemplo adicional: Sistema de calificaciones**
+
+console.log("\n=== Caso de uso: Sistema de calificaciones ===");
+
+class GradeSystem {
+  constructor() {
+    this.grades = new BinarySearchTree();
+  }
+
+  addGrade(score) {
+    this.grades.insert(score);
+    console.log(`Calificación ${score} agregada`);
+  }
+
+  getPassingGrades(passingScore = 60) {
+    const allGrades = this.grades.inOrder();
+    return allGrades.filter((grade) => grade >= passingScore);
+  }
+
+  getFailingGrades(passingScore = 60) {
+    const allGrades = this.grades.inOrder();
+    return allGrades.filter((grade) => grade < passingScore);
+  }
+
+  getHighestGrade() {
+    return this.grades.findMax();
+  }
+
+  getLowestGrade() {
+    return this.grades.findMin();
+  }
+
+  getGradeCount() {
+    return this.grades.inOrder().length;
+  }
+}
+
+const gradeSystem = new GradeSystem();
+[85, 72, 90, 45, 88, 67, 92, 58, 76, 95].forEach((grade) => {
+  gradeSystem.addGrade(grade);
+});
+
+console.log(
+  "Todas las calificaciones (ordenadas):",
+  gradeSystem.grades.inOrder()
+);
+console.log(
+  "Calificaciones aprobatorias (≥60):",
+  gradeSystem.getPassingGrades()
+);
+console.log(
+  "Calificaciones reprobatorias (<60):",
+  gradeSystem.getFailingGrades()
+);
+console.log("Calificación más alta:", gradeSystem.getHighestGrade());
+console.log("Calificación más baja:", gradeSystem.getLowestGrade());

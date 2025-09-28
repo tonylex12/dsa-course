@@ -344,3 +344,44 @@ console.log("getSize():", lista.getSize());
 console.log("isEmpty():", lista.isEmpty());
 
 console.log("reverse():", lista.reverse().toString());
+
+// 📈 **Complejidad de operaciones:**
+
+/*
+Operación               Complejidad
+---------               -----------
+prepend(data)           O(1)
+append(data)            O(1)
+insert(index, data)     O(n/2) - optimizado
+get(index)              O(n/2) - optimizado
+indexOf(data)           O(n)
+removeFirst()           O(1)
+removeLast()            O(1) - ventaja sobre lista simple
+removeAt(index)         O(n/2) - optimizado
+remove(data)            O(n)
+reverse()               O(n)
+toArray()               O(n)
+toArrayReverse()        O(n)
+clear()                 O(1)
+getSize()               O(1)
+isEmpty()               O(1)
+*/
+
+// 🎯 **Ventajas de la Lista Doblemente Enlazada:**
+// ✅ Eliminación al final: O(1) (vs O(n) en lista simple)
+// ✅ Acceso optimizado: O(n/2) empezando desde el lado más cercano
+// ✅ Iteración bidireccional
+// ✅ Inserción/eliminación en cualquier extremo: O(1)
+// ✅ Ideal para implementar deques (colas dobles)
+
+// ⚠️ **Desventajas:**
+// ❌ Más uso de memoria (dos punteros por nodo)
+// ❌ Implementación más compleja
+// ❌ Mantenimiento de dos punteros
+
+// 🔧 **Casos de uso ideales:**
+// - Implementación de deques (colas dobles)
+// - Navegación bidireccional (ej: historial de navegador)
+// - Cuando necesitas eliminar frecuentemente al final
+// - Listas de reproducción con navegación hacia atrás
+// - Implementación de LRU cache

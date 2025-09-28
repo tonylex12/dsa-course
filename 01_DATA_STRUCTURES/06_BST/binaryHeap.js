@@ -388,3 +388,56 @@ finalLeaderboard
   .forEach((score, index) => {
     console.log(`${index + 1}. ${score} puntos`);
   });
+
+// 📈 **Complejidad de operaciones:**
+
+/*
+Operación           Complejidad
+---------           -----------
+insert(value)       O(log n)
+extract()           O(log n)
+peek()              O(1)
+isEmpty()           O(1)
+_heapifyUp()        O(log n)
+_heapifyDown()      O(log n)
+printTree()         O(n)
+printCompact()      O(n)
+printArray()        O(n)
+*/
+
+// 🎯 **Ventajas del Binary Heap:**
+// ✅ Acceso inmediato al min/max: O(1)
+// ✅ Inserción y eliminación eficientes: O(log n)
+// ✅ Implementación simple con arrays
+// ✅ Garantiza la propiedad de heap automáticamente
+// ✅ Uso eficiente de memoria (estructura completa)
+
+// ⚠️ **Limitaciones:**
+// ❌ No permite búsqueda eficiente de elementos arbitrarios: O(n)
+// ❌ No mantiene orden completo (solo parcial)
+// ❌ Eliminación de elementos específicos es compleja
+
+// 🔧 **Casos de uso ideales:**
+// - Priority Queues (colas de prioridad)
+// - Algoritmos de ordenamiento (Heapsort)
+// - Leaderboards y ranking systems
+// - Algoritmo de Dijkstra (shortest path)
+// - Scheduling de procesos en sistemas operativos
+// - Selección de top-K elementos
+// - Merge K sorted arrays
+
+// 🚀 **Min Heap vs Max Heap - Cuándo usar cada uno:**
+
+/*
+MIN HEAP:
+- Encontrar el elemento MÍNIMO rápidamente
+- Priority queue donde menor valor = mayor prioridad
+- Algoritmo de Dijkstra
+- Mantener los K elementos más grandes (paradójicamente)
+
+MAX HEAP:
+- Encontrar el elemento MÁXIMO rápidamente
+- Priority queue donde mayor valor = mayor prioridad
+- Heapsort (orden descendente)
+- Mantener los K elementos más pequeños
+*/
